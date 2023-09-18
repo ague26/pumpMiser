@@ -22,7 +22,7 @@
 }
 .appliance-icon{
   background-color: #1B3854;
-  border: 1px solid #4B6B7A ;
+  border: 1px solid #4B6B7A;
   display: flex;
 }
 .appliance-icon img{
@@ -30,6 +30,10 @@
   object-fit:cover;
   margin: 5px;
 }
-#blueWater{
+#blueWaterH{
+  background-color: #9BD3FA;
+}
+
+#blueWaterV{
   background-color: #9BD3FA;
 }
