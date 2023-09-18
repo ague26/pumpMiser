@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>GPM Meter</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-550.500000, -682.500000)">
+            <g id="Left-Side-" transform="translate(11.000000, 638.000000)">
+                <g id="GPM-Meter" transform="translate(542.000000, 47.000000)">
+                    <circle id="Oval" stroke="#979797" stroke-width="5" cx="34.5" cy="34.5" r="34.5"></circle>
+                    <g id="Meter" transform="translate(33.000000, 24.000000)" fill="#FB0000" fill-rule="nonzero">
+                        <path d="M7.90243211,1.38080638 L3.48054326,10.5141869 C3.09305815,11.4537452 2.40926091,12 1.65708394,12 C1.04166642,12 0.517421866,11.6940973 0.221109726,11.2133931 C-0.0979956549,10.6452881 -0.0752024134,9.94608189 0.312282692,9.35612669 L6.10176603,0.463098291 C6.39807817,0.026094438 6.99070245,-0.12685691 7.46936052,0.113495209 C7.94801859,0.353847327 8.13036453,0.900102143 7.90243211,1.38080638 Z" id="XMLID_1594_"></path>
+                    </g>
+                    <path d="M34,13 C46.7025492,13 57,23.2974508 57,36 C57,39.9850177 55.9865357,43.7333281 54.2032897,47.0012486 L13.7967103,47.0012486 C12.0134643,43.7333281 11,39.9850177 11,36 C11,23.2974508 21.2974508,13 34,13 Z" id="Combined-Shape" stroke="#979797"></path>
+                    <line x1="13.5" y1="47.5" x2="53.5" y2="47.5" id="Line-2" stroke="#FFFFFF" stroke-width="3"></line>
+                    <text id="GPM" font-family="Helvetica-Bold, Helvetica" font-size="10" font-weight="bold" line-spacing="10" fill="#000000">
+                        <tspan x="12.9350586" y="53.3759766">GPM</tspan>
+                    </text>
+                    <text id="25" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
+                        <tspan x="57" y="45">25</tspan>
+                    </text>
+                    <text id="15" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
+                        <tspan x="29" y="11">15</tspan>
+                    </text>
+                    <text id="10" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
+                        <tspan x="2" y="30">10</tspan>
+                    </text>
+                    <text id="5" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
+                        <tspan x="5" y="45">5</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

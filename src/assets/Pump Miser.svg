@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30.1851611px" height="46px" viewBox="0 0 30.1851611 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Pump Miser</title>
+    <defs>
+        <linearGradient x1="55.5584027%" y1="3.25581075%" x2="28.9685524%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FF0000" stop-opacity="0.743559297" offset="0%"></stop>
+            <stop stop-color="#FF4848" stop-opacity="0.741187009" offset="33.6249938%"></stop>
+            <stop stop-color="#634141" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="7.31382491 91.0688975 7.31382491 108.43289 5.48183346 108.43289 5.48183346 121.638239 -1.42108547e-14 121.638239 -1.42108547e-14 132.385586 29.1851611 132.385586 29.1851611 121.638239 23.5929078 121.638239 24.0448992 108.43289 21.6149627 108.43289 21.6149627 91.0688975 18.7333967 87.3855865 10.8491844 87.3855865"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-120.339878, -724.885586)">
+            <g id="Left-Side-" transform="translate(11.000000, 638.000000)">
+                <g id="Pump-Miser" transform="translate(109.839878, 0.000000)">
+                    <use fill="#D8D8D8" xlink:href="#path-2"></use>
+                    <use stroke="#000000" stroke-width="1" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
