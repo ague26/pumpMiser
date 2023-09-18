@@ -12,4 +12,21 @@
 }
 #water-usage-box{
   border-color: #527A89;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.house-service{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin:5px 0;
+}
+.appliance-icon{
+  background-color: #1B3854;
+  border: 1px solid #4B6B7A ;
+  display: flex;
+}
+.appliance-icon img{
+  max-width: 20px;
+  object-fit:cover;
+  margin: 5px;
 }
