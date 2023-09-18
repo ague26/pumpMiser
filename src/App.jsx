@@ -10,7 +10,6 @@ function App() {
 
   return (
     <>
-      {/* <div className="bg-auto bg-no-repeat" style={{backgroundImage:`url(${BG})`}}> */}
       <div id="house-section" className="relative max-w-7xl m-auto">  
         <img src={BG} className="bg-contain" />
         <div id="control-panel" className="flex justify-center absolute items-center top-1/4 right-3">
@@ -52,6 +51,19 @@ function App() {
               <p className="text-xs">FLUSH TOILET</p>
             </div>
           </div>
+        </div>
+
+        <div className="flex w-full justify-center">
+        <div className="bg-white w-1/2 border-slate-500 border-8">
+          <div><img src={logo} /></div>
+          <div>
+            <div id="blueWaterH" className="absolute top-3/4">
+            blue water tube horizontal
+            </div>
+            <div id="blueWaterV" className="absolute top-full">
+            blue water tube vertical
+            </div>
+            </div>
 
         </div>
       </div>
