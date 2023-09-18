@@ -6,6 +6,9 @@
   margin:0;
   padding:0;
 }
+#house-section{
+  min-width: 1000px;
+}
 #control-panel{
   background-color: #444C57;
   color:white;
