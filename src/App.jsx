@@ -22,7 +22,6 @@ function App() {
 
   return (
     <>
-      {/* <div className="bg-auto bg-no-repeat" style={{backgroundImage:`url(${BG})`}}> */}
       <div className="relative max-w-7xl m-auto">
         <img src={BG} className="bg-contain" />
         
@@ -65,7 +64,6 @@ function App() {
               <p className="text-xs">FLUSH TOILET</p>
             </div>
           </div>
-        
         </div>
 
         <div className="flex w-full justify-center">
