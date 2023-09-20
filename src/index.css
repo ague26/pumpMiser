@@ -6,7 +6,7 @@
   margin:0;
   padding:0;
 }
-#house-section{
+#parent{
   min-width: 1000px;
 }
 #control-panel{
@@ -38,4 +38,7 @@
 }
 #blueWaterV{
   background-color: #9BD3FA;
+}
+#amp-meter-text{
+  font-size: 5px;
 }
