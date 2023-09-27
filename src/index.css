@@ -42,3 +42,127 @@
 #amp-meter-text{
   font-size: 5px;
 }
+
+
+.bubble {
+  background-color: yellow;
+  border-radius: 20px;
+  padding: 20px;
+  animation: bubbleAnimation 3s alternate infinite;
+}
+
+.bubble-tail {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid yellow; /* Match bubble background color */
+  bottom: -10px; /* Adjust to position the tail at the bottom right */
+  right: -10px; /* Adjust to position the tail at the bottom right */
+}
+
+@keyframes bubbleAnimation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+p {
+  margin: 0;
+  text-align: center;
+}
+
+
+@keyframes emptyAnimation {
+  0% {
+    y: 40%;
+  }
+  100% {
+    y: 100%;
+  }
+}
+
+.waterAnimation {
+  animation: emptyAnimation 5s linear forwards, fillAnimation 10s 5s linear forwards;
+}
+
+ @keyframes fillAnimation {
+  0% {
+    y: 100%;
+  }
+  100% {
+    y: 60%;
+  }
+}
+
+@keyframes emptyAnimationRight {
+  0% {
+    y: 40%;
+  }
+  100% {
+    y: 100%;
+  }
+}
+
+.waterAnimationRight {
+  animation: emptyAnimationRight 5s linear infinite alternate
+}
+
+ /* @keyframes fillAnimation {
+  0% {
+    y: 100%;
+  }
+  100% {
+    y: 60%;
+  }
+} */
+
+.waterBall{
+  background-color: #17cdfe;
+  border-color: #17cdfe;
+  visibility: hidden;
+}
+.waterBallAnimation{
+  animation: waterBallRunning 3s linear infinite;
+
+}
+@keyframes waterBallRunning {
+  0% {
+    top: 60%;
+    visibility: visible;
+  }
+  15%{
+    top: 10%;
+    visibility:visible
+  }
+  20%{
+    right: 97%;
+    top:10%;
+    visibility:visible;
+  }
+  
+  50%{
+    right: 60%;
+    top:10%;
+    visibility:visible;
+  }
+  80%{
+    right: 30%;
+    top:10%;
+    visibility:visible;
+  }
+  100%{
+    right: 0%;
+    top:10%;
+    visibility:visible;
+  }
+  
+}
+
+.animateP {
+  transform: translateX(200px); /* Move the slanted line horizontally */
+}
