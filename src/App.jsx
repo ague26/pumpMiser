@@ -6,24 +6,20 @@ import Sprinkler from "./assets/Sprinkler.png"
 import Toilet from "./assets/Toilet.png"
 import Kitchen from "./assets/Washing-Dish.png"
 import logo from "./assets/AquaSolutions.png"
-import AMP from "./assets/Amp Meter.svg"
-import GPM from "./assets/GPM Meter.svg"
 import HappyWoman from "./assets/Happy Woman Profile.png"
 import pipe1 from "./assets/pipe1.svg"
 import pipe2 from "./assets/pipe2.svg"
-import pressure from "./assets/pressure-gauge.png"
 import pumpMiser from "./assets/Pump Miser.svg"
 import Recycle from "./assets/Recycle.svg"
 import RecycleAnimation from "./assets/RecycleAnimation.svg"
 import wellPump from "./assets/well-pump.png"
 import AngryWoman from "./assets/Angry Woman Profile.png"
-import Bathgif from "./assets/bath.gif"
 import Toiletgif from "./assets/toilet.gif"
 import sprinklersgif from "./assets/sprinkler.gif"
 import Laundrygif from "./assets/laundry.gif"
-import Dishwashergif from "./assets/dishwasher.gif"
-import Kitchengif from "./assets/kitchenFaucet.gif"
-import OutlinePm from "./assets/Pump Miser Outline.png"
+import DishwashergifV from "./assets/DishwasherV.gif"
+import Kitchengif from "./assets/kitchen.gif"
+import pmLogo from "./assets/PM-logo.png"
 
 import {useRef,useState } from "react"
 
@@ -70,9 +66,6 @@ function App() {
     }else{
       IconAnimation.style.display = "none"
     }
-    // console.log(document.getElementById(`${Element}animation`).style.display)
-    // if(idElement.style)
-    //get element by id
   }
   const selectAction =(element)=>{
     chatBubbleRemover();
@@ -92,13 +85,16 @@ function App() {
   }
   return (
     <>
-      <div id="parent">
-        <div id="house-section" className="relative max-w-4xl m-auto -mt-10">  
+      <div id="parent" className="flex gap-2 flex-col justify-around m-auto">
+        <div id="upper-half" className="relative m-auto max-w-5xl  min-h-full">  
           <img src={BG} className="bg-contain" />
+          <div id="logo" className="w-36 top-0 left-0 absolute">
+            <img src={logo}/>
+          </div>
           <div id="chat-bubble" ref={chatBubble} className="absolute top-1/4 right-1/4 z-10	w-1/4" >
             <div className="bubble relative">
               <div className="bubble-content font-bold">
-                <p>Click a button to turn on the water and start the Cycle Stop Valve demo</p>
+                <p>Click a button to turn on the water and start the Pump Miser&#8482; demo</p>
               </div>
               <div className="bubble-tail"></div>
             </div>
@@ -143,211 +139,240 @@ function App() {
               </div>
             </div>
           </div>
-          <div id="bathanimation" style={{"display":"none"}} className="absolute items-center gap-2 top-56 right-64">
-            <div className="flex w-10">
-              <span className="border-2 border-dashed flex border-white	w-full"></span>
+          <div id="bathanimation" style={{"display":"none"}} className="absolute items-end top-36 right-60">
+            <div className="flex w-12">
+              <span className="border-2 border-dashed flex border-black	w-full -skew-y-[25deg]"></span>
             </div>
-            <div className="w-20 bg-white	rounded-lg p-2">
-              <img src={Bathgif}/>
+            <div className="w-36 bg-slate-700	rounded-full border-4	p-4">
+              <div style={{"width":"100%","height":"0","paddingBottom":"100%","position":"relative"}}>
+                <iframe src="https://giphy.com/embed/d5Tbt7bo5OBi2wQH1i" 
+                  width="100%" 
+                  height="100%" 
+                  style={{"position":"absolute"}}
+                  className="giphy-embed" 
+                  allowFullScreen></iframe>
+              </div>
             </div>
           </div>
           <div id="kitchenanimation" style={{"display":"none"}} 
-          className="absolute items-center gap-2 top-32 right-[24.5rem] flex-col h-auto"
+          className="absolute items-center gap-2 top-32 right-[25rem] flex-col h-auto"
           >
-            <div className="w-20 bg-white	rounded-lg p-2">
-              <img src={Kitchengif}/>
+            <div className="w-36 rounded-full border-4	">
+              <img className="rounded-full h-32" src={Kitchengif}/>
             </div>
             <div>
               <span className="border-2 border-dashed flex	border-black	h-28"></span>
             </div>
           </div>
           <div id="dishwasheranimation" style={{"display":"none"}} 
-          className="absolute gap-2 top-3/4 right-52 items-center">
-            <div className="w-28">
+          className="absolute gap-2 -bottom-3 right-52 items-center">
+            <div className="w-24 -skew-y-6">
               <span className="border-2 border-dashed flex border-black	w-full"></span>
             </div>
-            <div className="w-20 bg-white	rounded-lg p-2">
-              <img src={Dishwashergif}/>
+            <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full border-4 p-4 overflow-hidden	">
+              <img className="w-11/12" src={DishwashergifV}/>
             </div>
           </div>
           <div id="laundryanimation" style={{"display":"none"}} 
-          className="absolute gap-2 top-3/4 left-44 items-center"
+          className="absolute gap-2 bottom-0 left-44 items-center"
           >
-            <div className="w-20 bg-white	rounded-lg p-2">
-              <img src={Laundrygif}/>
+            <div className="w-36 h-36 flex items-center justify-center bg-slate-700 rounded-full border-4 p-4 overflow-hidden">
+              <img className="w-9/12" src={Laundrygif}/>
             </div>
-            <div className="w-28">
+            <div className="w-24">
               <span className="border-2 border-dashed flex border-black	w-full"></span>
             </div>
           </div>
           <div id="Sprinklersanimation" style={{"display":"none"}} 
-          className="absolute gap-2 top-2/4 left-8 items-center flex-col"
+          className="absolute gap-2 bottom-24 left-2 items-center flex-col"
           >
-            <div className="w-20 bg-white	rounded-lg p-2">
-              <img src={sprinklersgif}/>
+            <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full border-4 p-4">
+              <img className="w-9/12" src={sprinklersgif}/>
             </div>
             <div className=" h-8 flex">
               <span className="border-2 border-dashed flex border-black"></span>
             </div>
           </div>
           <div id="toiletanimation" style={{"display":"none"}} 
-          className="absolute gap-2 top-[14rem] left-64 items-center"
+          className="absolute top-40 left-64 items-end"
           >
-            <div className="w-14 bg-white	rounded-lg p-2">
-              <img src={Toiletgif}/>
+            <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full p-4 border-4 overflow-hidden">
+              <img className="w-8/12" src={Toiletgif}/>
             </div>
-            <div className="w-28">
+            <div className="w-20 skew-y-12 justify-self-start">
               <span className="border-2 border-dashed flex border-black	w-full"></span>
             </div>
             
           </div>
         </div>
-        <div className="flex w-full justify-center max-w-7xl m-auto">
-            <div id="left-side" className="w-1/2 border-slate-500 border-r-2	">
-              <div>
-                <img src={logo} className="p-2"/>
+        <div id="lower-half" className="flex w-full justify-center max-w-7xl m-auto gap-4">
+            <div id="left-side" className="w-1/2 ">
+              <div id="pump-miser-logo" className="w-40">
+                <img src={pmLogo} className="p-2"/>
               </div>
-              <div className="flex items-center justify-center flex-col">
-                <div className="w-11/12">
-                  <div className="flex -mb-8">
-                    <div id="tank-container" className="w-2/3 flex items-center flex-col justify-end">
-                      <div className="flex w-9/12">
-                        <div id="pumpMiser-container" className="flex flex-col self-end flex-1 items-start mb-1">
-                          <div className="w-2/5	 ml-2"><img src={pumpMiser}/></div>
-                          <div id="border-line" className="flex flex-col w-full items-end self-start ml-4">
-                            <span className="border-solid	border border-zinc-700 self-start h-3"></span>
-                            <span className="w-full border-solid border border-zinc-700"></span>
-                          </div>
+              <div className="w-full">
+                <div id="upper-tube" className="flex -mb-9 ml-auto mr-0">
+                  <div id="tank-container" className="w-2/3 flex items-center flex-col justify-end">
+                    <div className="flex w-10/12 gap-3">
+                      <div id="pumpMiser-container" className="flex flex-col justify-end items-end w-20 mb-4 relative">
+                        <img src={pumpMiser}/>
+                        <div id="border-line" className="flex flex-col w-full items-end -z-10 absolute left-3/4 -bottom-2">
+                          <span className="border-solid	border border-zinc-700 self-start h-3"></span>
+                          <span className="w-full border-solid border border-zinc-700"></span>
                         </div>
-                        <div className="flex flex-1 relative">
-
-                          <svg
-                            viewBox="0 0 84.2275854 138.57695"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            {/* <!-- Mason jar outline --> */}
-                              <path
-                            d="M75.1601221,158.5662 C75.1601221,158.5662 77.6146357,158.555218 80.3583201,158.5662 C83.4068805,158.578403 86.8097537,158.5662 87.5421213,158.5662 L144.647796,158.5662 C145.247981,158.590258 147.710204,158.5662 148.353907,158.5662 C148.997611,158.5662 157.160117,158.5662 157.160122,158.5662 L157.160122,145.293111 C157.165463,143.357266 157.165463,136.363818 157.160117,129.566296 L157.160117,67.3516036 C157.154093,57.9420097 139.405869,44.3325692 129.95549,44.0768928 L129.95549,34.9762951 L136.822616,34.9762951 C136.822616,34.9762951 136.822616,34.2713274 136.822616,33.4051999 C136.822616,32.5390724 136.794016,33.2431434 136.822616,32.524901 L136.822616,23.7803322 C136.822616,22.9641108 136.771196,22.8312423 136.822616,22.5768928 C136.852342,22.4298545 136.822616,24.4009608 136.822616,22 L98.9341605,22 C98.9341605,22.4922573 98.9341605,22.4922573 98.9341605,23.7803322 C98.9341605,24.6309368 98.9341605,25.2688902 98.9341605,25.6941924 C98.9341605,27.2121277 98.9341605,29.4890305 98.9341605,32.524901 C98.9341605,33.8126845 98.9341605,33.8126845 98.9341605,34.9762951 C101.830923,34.9762951 104.003495,34.9762951 105.451876,34.9762951 C105.670768,34.9762951 105.999106,34.9762951 106.43689,34.9762951 L106.43689,44.0768928 C97.0654621,44.3575934 75.1601221,57.9514836 75.1601221,67.3533525 L75.1601221,129.568044 C75.1673899,136.275171 74.6601221,141.627458 75.1601221,145.293111 Z"
-                            fill="#ECE8D1"
-                            stroke="#000000"
-                            strokeWidth="2"
-                            transform="translate(-194.779384, -658.999942) translate(11.000000, 638.000000) translate(109.839878, 0.000000) translate(116.051817, 90.288446) rotate(180.000000) translate(-116.051817, -90.288446)"
+                      </div>
+                      <div id="tank-container-svg" className="flex w-28">
+                        <svg
+                          viewBox="0 0 84.2275854 138.57695"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                        >
+                          {/* Mason jar outline*/}
+                          <path
+                          d="M75.1601221,158.5662 C75.1601221,158.5662 77.6146357,158.555218 80.3583201,158.5662 C83.4068805,158.578403 86.8097537,158.5662 87.5421213,158.5662 L144.647796,158.5662 C145.247981,158.590258 147.710204,158.5662 148.353907,158.5662 C148.997611,158.5662 157.160117,158.5662 157.160122,158.5662 L157.160122,145.293111 C157.165463,143.357266 157.165463,136.363818 157.160117,129.566296 L157.160117,67.3516036 C157.154093,57.9420097 139.405869,44.3325692 129.95549,44.0768928 L129.95549,34.9762951 L136.822616,34.9762951 C136.822616,34.9762951 136.822616,34.2713274 136.822616,33.4051999 C136.822616,32.5390724 136.794016,33.2431434 136.822616,32.524901 L136.822616,23.7803322 C136.822616,22.9641108 136.771196,22.8312423 136.822616,22.5768928 C136.852342,22.4298545 136.822616,24.4009608 136.822616,22 L98.9341605,22 C98.9341605,22.4922573 98.9341605,22.4922573 98.9341605,23.7803322 C98.9341605,24.6309368 98.9341605,25.2688902 98.9341605,25.6941924 C98.9341605,27.2121277 98.9341605,29.4890305 98.9341605,32.524901 C98.9341605,33.8126845 98.9341605,33.8126845 98.9341605,34.9762951 C101.830923,34.9762951 104.003495,34.9762951 105.451876,34.9762951 C105.670768,34.9762951 105.999106,34.9762951 106.43689,34.9762951 L106.43689,44.0768928 C97.0654621,44.3575934 75.1601221,57.9514836 75.1601221,67.3533525 L75.1601221,129.568044 C75.1673899,136.275171 74.6601221,141.627458 75.1601221,145.293111 Z"
+                          fill="#ECE8D1"
+                          stroke="#000000"
+                          strokeWidth="2"
+                          transform="translate(-194.779384, -658.999942) translate(11.000000, 638.000000) translate(109.839878, 0.000000) translate(116.051817, 90.288446) rotate(180.000000) translate(-116.051817, -90.288446)"
                           />
+                          
+                          <text x="25" y="20" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">TANK</text>
 
-
-                            {/* <!-- Define a clip path for the water --> */}
-                            <defs>
-                              <clipPath id="waterClip">
-                                  <path
-                                      d="M75.1601221,158.5662 C75.1601221,158.5662 77.6146357,158.555218 80.3583201,158.5662 C83.4068805,158.578403 86.8097537,158.5662 87.5421213,158.5662 L144.647796,158.5662 C145.247981,158.590258 147.710204,158.5662 148.353907,158.5662 C148.997611,158.5662 157.160117,158.5662 157.160122,158.5662 L157.160122,145.293111 C157.165463,143.357266 157.165463,136.363818 157.160117,129.566296 L157.160117,67.3516036 C157.154093,57.9420097 139.405869,44.3325692 129.95549,44.0768928 L129.95549,34.9762951 L136.822616,34.9762951 C136.822616,34.9762951 136.822616,34.2713274 136.822616,33.4051999 C136.822616,32.5390724 136.794016,33.2431434 136.822616,32.524901 L136.822616,23.7803322 C136.822616,22.9641108 136.771196,22.8312423 136.822616,22.5768928 C136.852342,22.4298545 136.822616,24.4009608 136.822616,22 L98.9341605,22 C98.9341605,22.4922573 98.9341605,22.4922573 98.9341605,23.7803322 C98.9341605,24.6309368 98.9341605,25.2688902 98.9341605,25.6941924 C98.9341605,27.2121277 98.9341605,29.4890305 98.9341605,32.524901 C98.9341605,33.8126845 98.9341605,33.8126845 98.9341605,34.9762951 C101.830923,34.9762951 104.003495,34.9762951 105.451876,34.9762951 C105.670768,34.9762951 105.999106,34.9762951 106.43689,34.9762951 L106.43689,44.0768928 C97.0654621,44.3575934 75.1601221,57.9514836 75.1601221,67.3533525 L75.1601221,129.568044 C75.1673899,136.275171 74.6601221,141.627458 75.1601221,145.293111 Z"
-                                      fill="#ECE8D1"
-                                      stroke="#000000"
-                                      strokeWidth="2"
-                                      transform="translate(-194.779384, -658.999942) translate(11.000000, 638.000000) translate(109.839878, 0.000000) translate(116.051817, 90.288446) rotate(180.000000) translate(-116.051817, -90.288446)"
-                                  />
-                              </clipPath>
-                            </defs>
-                            <rect
-                              x="0"
-                              y="40%"
-                              width="100%"
-                              height="60%"
-                              fill="#53CCF9"
-                              clipPath="url(#waterClip)"
-                              ref={pmTank}
-                            />
-                          </svg>
-
-
-                          <p className="absolute left-1/4 text-xs	top-2">Tank</p> 
-                        </div>
-                        <div id="pressure-container" className="flex flex-col self-end flex-1 items-end mb-1">
-                          <div className="w-4/5	"><img src={pressure} /></div>
-                          <div id="border-line" className="flex flex-col w-full items-end self-end mr-5">
-                            <span className="border-solid	border border-zinc-700 self-end h-3"></span>
-                            <span className="w-full border-solid	border border-zinc-700"></span>
-                          </div>
-                        </div>
+                          {/* <!-- Define a clip path for the water --> */}
+                          <defs>
+                            <clipPath id="waterClip">
+                                <path
+                                    d="M75.1601221,158.5662 C75.1601221,158.5662 77.6146357,158.555218 80.3583201,158.5662 C83.4068805,158.578403 86.8097537,158.5662 87.5421213,158.5662 L144.647796,158.5662 C145.247981,158.590258 147.710204,158.5662 148.353907,158.5662 C148.997611,158.5662 157.160117,158.5662 157.160122,158.5662 L157.160122,145.293111 C157.165463,143.357266 157.165463,136.363818 157.160117,129.566296 L157.160117,67.3516036 C157.154093,57.9420097 139.405869,44.3325692 129.95549,44.0768928 L129.95549,34.9762951 L136.822616,34.9762951 C136.822616,34.9762951 136.822616,34.2713274 136.822616,33.4051999 C136.822616,32.5390724 136.794016,33.2431434 136.822616,32.524901 L136.822616,23.7803322 C136.822616,22.9641108 136.771196,22.8312423 136.822616,22.5768928 C136.852342,22.4298545 136.822616,24.4009608 136.822616,22 L98.9341605,22 C98.9341605,22.4922573 98.9341605,22.4922573 98.9341605,23.7803322 C98.9341605,24.6309368 98.9341605,25.2688902 98.9341605,25.6941924 C98.9341605,27.2121277 98.9341605,29.4890305 98.9341605,32.524901 C98.9341605,33.8126845 98.9341605,33.8126845 98.9341605,34.9762951 C101.830923,34.9762951 104.003495,34.9762951 105.451876,34.9762951 C105.670768,34.9762951 105.999106,34.9762951 106.43689,34.9762951 L106.43689,44.0768928 C97.0654621,44.3575934 75.1601221,57.9514836 75.1601221,67.3533525 L75.1601221,129.568044 C75.1673899,136.275171 74.6601221,141.627458 75.1601221,145.293111 Z"
+                                    fill="#ECE8D1"
+                                    stroke="#000000"
+                                    strokeWidth="2"
+                                    transform="translate(-194.779384, -658.999942) translate(11.000000, 638.000000) translate(109.839878, 0.000000) translate(116.051817, 90.288446) rotate(180.000000) translate(-116.051817, -90.288446)"
+                                />
+                            </clipPath>
+                          </defs>
+                          <rect
+                            x="0"
+                            y="40%"
+                            width="100%"
+                            height="60%"
+                            fill="#53CCF9"
+                            clipPath="url(#waterClip)"
+                            ref={pmTank}
+                          />
+                        </svg>
                       </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe1} />
+                      <div id="pressure-gauge" className="flex justify-start items-end w-20  mb-4 relative">
+                        <svg viewBox="0 0 74 74" width="100%" xmlns="http://www.w3.org/2000/svg">
+                          <title>PSI Meter</title>
+                          <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                          <text x="55" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">80</text>
+                          <text x="48" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">60</text>
+                          <text x="32" y="13" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">40</text>
+                          <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">20</text>
+                          <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
+                          <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                            <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                          </g>
+                          <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                          <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">PSI</text>
+                        </svg>
+                        <div id="border-line" className="w-[110%] flex flex-col items-end -z-10 absolute right-2/4 -bottom-2">
+                          <span className="border-solid	border border-zinc-700  h-3"></span>
+                          <span className="w-full border-solid	border border-zinc-700 "></span>
+                        </div>
                       </div>
                     </div>
-                    <div id="pressure-container" className="flex flex-col w-1/3 justify-end items-center">
-                      <p className="text-xs font-bold">Pressure</p>
-                      <p className="text-xs font-bold">Switch</p>
-                      <div className="flex flex-col items-center">
-                        <div className="flex ml-5 max-h-6 items-center">
-                          <div className="flex w-8 h-full bg-neutral-500">
-                            <span ref={toggleSwitch} className="rounded-full border-8 m-auto border-red-500"></span>
-                          </div>
-                          <div className="ml-1">
-                            <p className="text-xs">50</p>
-                            <p className="text-xs">70</p>
-                          </div>
-                        </div>
-                        <span className="bg-neutral-500	 w-2 h-8"></span>
-                        </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe2} />
-                      </div>
-                    </div>
-                    <div id="gpm-container" className="flex flex-col w-1/3 justify-end items-center">
-                      <div className="flex flex-col items-center">
-                        <div className="max-w-fit">
-                          <img src={GPM}/>
-                        </div>
-                        <span className="bg-neutral-500	 w-2 h-8"></span>
-                      </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe2} />
-                      </div>
+                    <div className="-mt-1.5">
+                      <img src={pipe1} />
                     </div>
                   </div>
-                  <div className="relative -z-10">
-                    <div ref={ballLeft} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
-                    <div id="blueWaterH" className="w-full h-7 rounded-ss-md"></div>
-                    <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
-                  </div>
-                  <div id="amp-container" className="flex w-full relative -mt-3 -ml-1">
-                    <div className="absolute -left-12 top-1/4 flex items-center m-auto">
-                      <div>
-                        <p className="font-bold text-center" id="amp-meter-text">AMP METER</p>
-                        <div className="w-9">
-                          <img src={AMP}/>
+                  <div id="pressure-container" className="flex flex-col w-1/3 justify-end items-center">
+                    <p className="text-xs font-bold">Pressure</p>
+                    <p className="text-xs font-bold">Switch</p>
+                    <div className="flex flex-col items-center">
+                      <div className="flex ml-5 max-h-6 items-center">
+                        <div className="flex w-8 h-full bg-neutral-500">
+                          <span ref={toggleSwitch} className="rounded-full border-8 m-auto border-red-500"></span>
+                        </div>
+                        <div className="ml-1">
+                          <p className="text-xs">50</p>
+                          <p className="text-xs">70</p>
                         </div>
                       </div>
-                      <div id="border-line" className="flex w-3">
-                        <span className="w-full border-solid border border-zinc-700"></span>
+                      <span className="bg-neutral-500	 w-2 h-8"></span>
                       </div>
+                    <div className="-mt-1.5">
+                      <img src={pipe2} />
                     </div>
-                    <div className="flex-1 relative">
-                      <div className="w-6">
-                        <img src={wellPump}/>
+                  </div>
+                  <div id="gpm-container" className="flex flex-col w-1/3 justify-end items-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-16">
+                        <svg viewBox="0 0 74 74" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <title>GPM Meter</title>
+                            <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                            <text x="55" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">25</text>
+                            <text x="48" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">15</text>
+                            <text x="32" y="13" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">10</text>
+                            <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">5</text>
+                            <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
+                            <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                            </g>
+                            <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                            <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">GPM</text>
+                        </svg>
                       </div>
-                      <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1" />
+                      <span className="bg-neutral-500	 w-2 h-8"></span>
                     </div>
-                    <div className="w-1/4 m-auto"><img src={HappyWoman} /></div>
+                    <div className="-mt-1.5">
+                      <img src={pipe2} />
+                    </div>
                   </div>
                 </div>
-              </div>
-           
+                <div id="water-tube" className="relative -z-10 ml-auto mr-0">
+                  <div ref={ballLeft} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
+                  <div id="blueWaterH" className="w-full h-8 rounded-ss-md"></div>
+                  <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
+                </div>
+                <div id="amp-container" className="flex w-full relative -mt-3 -ml-1">
+                  <div className=" -left-[4rem] top-1/4 flex w-16 flex-col">
+                      <p className="font-bold text-center text-xs" >AMP METER</p>
+                      <svg viewBox="0 0 74 74" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <title>Amp Meter</title>
+                        <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                        <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
+                        <text x="40" y="18" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
+                        <text x="15" y="19" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
+                        <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
+                        <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                          <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                        </g>
+                        <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                        <text x="25" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">AMP</text>
+                      </svg>
+                  </div>
+                  <div id="border-line" className="flex w-3 items-center">
+                    <span className="w-full border-solid border border-zinc-700"></span>
+                  </div>
+                  <div className="flex-1 relative">
+                    <div className="w-6">
+                      <img src={wellPump}/>
+                    </div>
+                    <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1" />
+                  </div>
+                  <div className="w-1/4 m-auto"><img src={HappyWoman} /></div>
+                </div>
+              </div>           
             </div>
-            <div id="right-side" className="w-1/2 border-slate-500 border-l-2	flex items-end">
-              <div className="flex items-end justify-center flex-col w-full">
-                <div className="w-11/12">
-                  <div className="flex -mb-8">
-                    <div id="tank-container" className="w-2/3 flex items-center flex-col justify-end">
-                      <div className="flex w-9/12">
-                        <div id="pumpMiser-container" className="flex flex-col self-end flex-1 items-start mb-1">
-                          <div className="w-2/5	 ml-2"><img src={OutlinePm}/></div>
-                          <div id="border-line" className="flex flex-col w-full items-end self-start ml-4">
-                            <span className="border-solid	border border-zinc-700 self-start h-3"></span>
-                            <span className="w-full border-solid border border-zinc-700"></span>
-                          </div>
-                        </div>
-                        <div className="flex flex-1 relative">
-                        
+            <span className="border-slate-500 border-r-4"></span>
+            <div id="right-side" className="w-1/2	flex items-end">
+              <div className="w-full">
+                <div id="right-upper-tube" className="flex -mb-9 ml-auto mr-0">
+                  <div id="right-tank-container" className="w-2/3 flex items-center flex-col justify-end">
+                    <div className="flex justify-end w-9/12 gap-3">
+                      <div id="right-tank-container-svg" className="flex w-24 relative">
                         <svg
                             viewBox="0 0 84.2275854 138.57695"
                             xmlns="http://www.w3.org/2000/svg"
@@ -360,6 +385,7 @@ function App() {
                             strokeWidth="2"
                             transform="translate(-194.779384, -658.999942) translate(11.000000, 638.000000) translate(109.839878, 0.000000) translate(116.051817, 90.288446) rotate(180.000000) translate(-116.051817, -90.288446)"
                           />
+                          <text x="25" y="20" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">TANK</text>
 
 
                             {/* <!-- Define a clip path for the water --> */}
@@ -384,82 +410,109 @@ function App() {
                               ref={pmTankRight}
                             />
                           </svg>
-
-
-
-
-
-
-                          <p className="absolute left-1/4 text-xs	top-2">Tank</p> 
-                        </div>
-                        <div id="pressure-container" className="flex flex-col self-end flex-1 items-end mb-1">
-                          <div className="w-4/5	"><img src={pressure} /></div>
-                          <div id="border-line" className="flex flex-col w-full items-end self-end mr-5">
-                            <span className="border-solid	border border-zinc-700 self-end h-3"></span>
-                            <span className="w-full border-solid	border border-zinc-700"></span>
-                          </div>
-                        </div>
                       </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe1} />
-                      </div>
-                    </div>
-                    <div id="pressure-container" className="flex flex-col w-1/3 justify-end items-center">
-                      <p className="text-xs font-bold">Pressure</p>
-                      <p className="text-xs font-bold">Switch</p>
-                      <div className="flex flex-col items-center">
-                        <div className="flex ml-5 max-h-6 items-center">
-                          <div className="flex w-8 h-full bg-neutral-500" >
-                            <span ref={toggleSwitchRight}  className="rounded-full border-8 m-auto border-red-500"></span>
-                          </div>
-                          <div className="ml-1">
-                            <p className="text-xs">50</p>
-                            <p className="text-xs">70</p>
-                          </div>
+                      <div id="right-pressure-gauge" className="flex justify-start items-end w-16  mb-4 relative">
+                        <svg viewBox="0 0 74 74" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <title>PSI Meter</title>
+                            <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                            <text x="55" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">80</text>
+                            <text x="48" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">60</text>
+                            <text x="32" y="13" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">40</text>
+                            <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">20</text>
+                            <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
+                            <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                            </g>
+                            <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                            <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">PSI</text>
+                        </svg>
+                        <div id="border-line" className="w-[110%] flex flex-col items-end -z-10 absolute right-2/4 -bottom-2">
+                          <span className="border-solid	border border-zinc-700 self-end h-3"></span>
+                          <span className="w-full border-solid	border border-zinc-700"></span>
                         </div>
-                        <span className="bg-neutral-500	 w-2 h-8"></span>
-                        </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe2} />
                       </div>
                     </div>
-                    <div id="gpm-container" className="flex flex-col w-1/3 justify-end items-center">
-                      <div className="flex flex-col items-center">
-                        <div className="max-w-fit">
-                          <img src={GPM}/>
-                        </div>
-                        <span className="bg-neutral-500	 w-2 h-8"></span>
-                      </div>
-                      <div className="-mt-1.5">
-                        <img src={pipe2} />
-                      </div>
+                    <div className="-mt-1.5">
+                      <img src={pipe1} />
                     </div>
                   </div>
-                  <div className="relative -z-10">
-                    <div ref={ballRight} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
-                    <div id="blueWaterH" className="w-full h-7 rounded-ss-md"></div>
-                    <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
-                  </div>
-                  <div id="amp-container" className="flex w-full relative -mt-3 -ml-1">
-                    <div className="absolute -left-12 top-1/4 flex items-center m-auto">
-                      <div>
-                        <p className="font-bold text-center" id="amp-meter-text">AMP METER</p>
-                        <div className="w-9">
-                          <img src={AMP}/>
+                  <div id="right-pressure-container" className="flex flex-col w-1/3 justify-end items-center">
+                    <p className="text-xs font-bold">Pressure</p>
+                    <p className="text-xs font-bold">Switch</p>
+                    <div className="flex flex-col items-center">
+                      <div className="flex ml-5 max-h-6 items-center">
+                        <div className="flex w-8 h-full bg-neutral-500" >
+                          <span ref={toggleSwitchRight}  className="rounded-full border-8 m-auto border-red-500"></span>
+                        </div>
+                        <div className="ml-1">
+                          <p className="text-xs">50</p>
+                          <p className="text-xs">70</p>
                         </div>
                       </div>
-                      <div id="border-line" className="flex w-3">
-                        <span className="w-full border-solid border border-zinc-700"></span>
+                      <span className="bg-neutral-500	 w-2 h-8"></span>
                       </div>
+                    <div className="-mt-1.5">
+                      <img src={pipe2} />
                     </div>
-                    <div className="flex-1 relative">
-                      <div className="w-6">
-                        <img src={wellPump}/>
-                      </div>
-                      <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1"/>
-                    </div>
-                    <div className="w-1/4 m-auto"><img src={AngryWoman} /></div>
                   </div>
+                  <div id="right-gpm-container" className="flex flex-col w-1/3 justify-end items-center">
+                    <div className="flex flex-col items-center">
+                    <div className="w-16">
+                        <svg viewBox="0 0 74 74" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <title>GPM Meter</title>
+                            <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                            <text x="55" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">25</text>
+                            <text x="48" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">15</text>
+                            <text x="32" y="13" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">10</text>
+                            <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">5</text>
+                            <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
+                            <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                            </g>
+                            <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                            <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">GPM</text>
+                        </svg>
+                      </div>
+                      <span className="bg-neutral-500	 w-2 h-8"></span>
+                    </div>
+                    <div className="-mt-1.5">
+                      <img src={pipe2} />
+                    </div>
+                  </div>
+
+                </div>
+                <div id="right-water-tube" className="relative -z-10 ml-auto mr-0">
+                  <div ref={ballRight} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
+                  <div id="blueWaterH" className="w-full h-8 rounded-ss-md"></div>
+                  <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
+                </div>
+                <div id="right-amp-container" className="flex w-full relative -mt-3 -ml-1">
+                  <div className=" -left-[4rem] top-1/4 flex w-16 flex-col">
+                    <p className="font-bold text-center text-xs">AMP METER</p>
+                    <svg viewBox="0 0 74 74" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                      <title>Amp Meter</title>
+                      <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+                      <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
+                      <text x="40" y="18" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
+                      <text x="15" y="19" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
+                      <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
+                      <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
+                        <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                      </g>
+                      <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+                      <text x="25" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">AMP</text>
+                    </svg>
+                  </div>
+                  <div id="border-line" className="flex w-3 items-center">
+                      <span className="w-full border-solid border border-zinc-700"></span>
+                    </div>
+                  <div className="flex-1 relative">
+                    <div className="w-6">
+                      <img src={wellPump}/>
+                    </div>
+                    <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1"/>
+                  </div>
+                  <div className="w-1/4 m-auto"><img src={AngryWoman} /></div>
                 </div>
               </div>
             </div>

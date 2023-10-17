@@ -1,34 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Amp Meter</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-8.500000, -912.500000)">
-            <g id="Left-Side-" transform="translate(11.000000, 638.000000)">
-                <g id="AMP-Tank" transform="translate(0.000000, 209.476190)">
-                    <g id="Amp-Meter" transform="translate(0.000000, 67.523810)">
-                        <circle id="Oval" stroke="#979797" stroke-width="5" cx="34.5" cy="34.5" r="34.5"></circle>
-                        <text id="25" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
-                            <tspan x="52" y="34">25</tspan>
-                        </text>
-                        <text id="15" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
-                            <tspan x="40" y="18">15</tspan>
-                        </text>
-                        <text id="10" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
-                            <tspan x="15" y="19">10</tspan>
-                        </text>
-                        <text id="5" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#000000">
-                            <tspan x="7" y="34">5</tspan>
-                        </text>
-                        <g id="Meter" transform="translate(33.000000, 24.000000)" fill="#FB0000" fill-rule="nonzero">
-                            <path d="M7.90243211,1.38080638 L3.48054326,10.5141869 C3.09305815,11.4537452 2.40926091,12 1.65708394,12 C1.04166642,12 0.517421866,11.6940973 0.221109726,11.2133931 C-0.0979956549,10.6452881 -0.0752024134,9.94608189 0.312282692,9.35612669 L6.10176603,0.463098291 C6.39807817,0.026094438 6.99070245,-0.12685691 7.46936052,0.113495209 C7.94801859,0.353847327 8.13036453,0.900102143 7.90243211,1.38080638 Z" id="XMLID_1594_"></path>
-                        </g>
-                        <path d="M34,5 C41.9620624,5 49.478754,8.07891108 54.9687547,13.8571429 C60.5944283,19.7781706 64.1575861,28.3138392 64.8685674,36.0005558 L3.14279601,36.0003152 C4.64926406,21.113577 17.889446,5 34,5 Z" id="Combined-Shape" stroke="#979797"></path>
-                        <text id="AMP" font-family="Helvetica-Bold, Helvetica" font-size="15" font-weight="bold" fill="#000000">
-                            <tspan x="17.3337402" y="52">AMP</tspan>
-                        </text>
-                    </g>
-                </g>
-            </g>
+<svg width="74px" height="74px" xmlns="http://www.w3.org/2000/svg">
+        <title>Amp Meter</title>
+        <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
+        <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
+        <text x="40" y="18" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
+        <text x="15" y="19" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
+        <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
+        <g transform="translate(33, 24)" fill="#FB0000">
+            <path d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z"/>
         </g>
-    </g>
-</svg>
+        <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
+        <text x="17.334" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="15" fontWeight="bold" fill="#000000">AMP</text>
+      </svg>

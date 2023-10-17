@@ -39,9 +39,6 @@
 #blueWaterV{
   background-color: #9BD3FA;
 }
-#amp-meter-text{
-  font-size: 5px;
-}
 
 
 .bubble {
@@ -112,15 +109,6 @@ p {
   animation: emptyAnimationRight 5s linear infinite alternate
 }
 
- /* @keyframes fillAnimation {
-  0% {
-    y: 100%;
-  }
-  100% {
-    y: 60%;
-  }
-} */
-
 .waterBall{
   background-color: #17cdfe;
   border-color: #17cdfe;
@@ -166,3 +154,29 @@ p {
 .animateP {
   transform: translateX(200px); /* Move the slanted line horizontally */
 }
+
+#water-tube,#upper-tube{
+  width: calc(100% - 4.75rem);
+}
+#right-water-tube,#right-upper-tube{
+  width: calc(100% - 4.75rem);
+}
+
+@keyframes rotateNeedle {
+  0% {
+    transform: rotate(-0deg);
+  }
+  100% {
+    transform: rotate(70deg); /* Adjust the angle as needed to point to "15" */
+  }
+}
+
+#needle-path {
+  animation: rotateNeedle 2s ease-in-out infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
+
+
+
+
+
