@@ -1,30 +1,11 @@
-import BG from "./assets/bg-pump-miser.png"
 import Bath from "./assets/Bath-Tub.png"
 import Dishwasher from "./assets/Dishwasher.png"
 import Laundry from "./assets/Laundry-Machine.png"
 import Sprinkler from "./assets/Sprinkler.png"
 import Toilet from "./assets/Toilet.png"
-import Kitchen from "./assets/Washing-Dish.png"
-import logo from "./assets/AquaSolutions.png"
-import HappyWoman from "./assets/Happy Woman Profile.png"
-import pipe1 from "./assets/pipe1.svg"
-import pipe2 from "./assets/pipe2.svg"
-import pumpMiser from "./assets/Pump Miser.svg"
-import Recycle from "./assets/Recycle.svg"
-import RecycleAnimation from "./assets/RecycleAnimation.svg"
-import wellPump from "./assets/well-pump.png"
-import AngryWoman from "./assets/Angry Woman Profile.png"
-import Toiletgif from "./assets/toilet.gif"
-import sprinklersgif from "./assets/sprinkler.gif"
-import Laundrygif from "./assets/laundry.gif"
-import DishwashergifV from "./assets/DishwasherV.gif"
-import Kitchengif from "./assets/kitchen.gif"
-import pmLogo from "./assets/PM-logo.png"
-
-import {useRef,useState } from "react"
+import {useRef,useState,useEffect } from "react"
 
 function App() {
-  const chatBubble = useRef(null);
   const pmTank = useRef(null);
   const pmTankRight = useRef(null)
   const toggleSwitch = useRef(null);
@@ -32,110 +13,202 @@ function App() {
   const ballLeft = useRef(null)
   const ballRight = useRef(null)
 
-  const [recycleIcon,setrecycleIcon] = useState(false)
+  const [statusControlBox,setstatusControlBox] = useState({})
+  const [waterAnimation,setwaterAnimation] = useState(false)
+  const [pmAmpgauge, setpmAmpgauge] = useState(0)
+  const [pmGpmgauge, setpmGpmgauge] = useState(0)
 
-  const chatBubbleRemover = ()=>{
-    if(chatBubble.current.style.display === ""){
-      chatBubble.current.style.display = "none"
-    }
-  }
-  const selectIcon = (x)=>{
-    let bgElement  = x.currentTarget.getElementsByClassName("appliance-icon")[0]
-    if(bgElement.style.backgroundColor == "green"){
-      console.log("hello")
-      bgElement.style.backgroundColor = "rgb(27, 56, 84)"
-    }else{
-      bgElement.style.backgroundColor = "green"
-    }
-  }
   const greenLight =()=>{
     toggleSwitch.current.style.borderColor = "rgb(0 255 0)"
   }
-  const greenLightRight =()=>{
-    toggleSwitchRight.current.style.borderColor = "rgb(0 255 0)"
-  }
-  const redLightRight =()=>{
-    toggleSwitchRight.current.style.borderColor = "rgb(239 68 68)"
-  }
-  const popupIcon = (x) =>{
-    let Selection = x.currentTarget.id
-    // document.getElementById(`${callRef}animation`).style.display = "flex"
-    let IconAnimation = document.getElementById(`${Selection}animation`)
+  const selectIcon = (x)=>{
+    let bgElement  = x.currentTarget.getElementsByClassName(`appliance-icon`)[0]
+    let value
+    let IconAnimation = document.getElementById(`${x.currentTarget.id}animation`)
+
     if(IconAnimation.style.display === "none"){
       IconAnimation.style.display = "flex"
     }else{
       IconAnimation.style.display = "none"
     }
-  }
-  const selectAction =(element)=>{
-    chatBubbleRemover();
-    selectIcon(element)
-    pmTank.current.classList.add("waterAnimation")
-    pmTankRight.current.classList.add("waterAnimationRight")
-    setTimeout(greenLight,5000)
-    setInterval(greenLightRight, 5000);
-    setInterval(redLightRight, 10000);
-    ballLeft.current.classList.add("waterBallAnimation")
-    ballRight.current.classList.add("waterBallAnimation")
-    if(recycleIcon === false){
-      setrecycleIcon(true)
-    }
-    popupIcon(element)
 
+    switch(x.currentTarget.id){
+      case("kitchen"):
+      case("diswasher"):
+      case("toilet"):
+        value = 1
+        break;
+      case("laundry"):
+        value = 2
+        break;
+      case("bath"):
+        value = 3
+        break;
+      case("Sprinklers"):
+        value = 8 
+        break;
+      default:
+      value = 1 
+    }
+
+    if(bgElement.style.backgroundColor === "green"){
+      bgElement.style.backgroundColor = "rgb(27, 56, 84)"
+      delete statusControlBox[x.currentTarget.id]
+      switch(x.currentTarget.id){
+        case("kitchen"):
+        case("diswasher"):
+        case("toilet"):
+          setpmGpmgauge((prev)=>prev - 10) 
+          break;
+        case("laundry"):
+          setpmGpmgauge((prev)=>prev - 20) 
+          break;
+        case("bath"):
+          setpmGpmgauge((prev)=>prev - 45) 
+          break;
+        case("Sprinklers"):
+          setpmGpmgauge((prev)=>prev - 55) 
+          break;
+        default:
+        value = 1 
+      }
+      setstatusControlBox({...statusControlBox});
+    }else{
+      bgElement.style.backgroundColor = "green";
+      switch(x.currentTarget.id){
+        case("kitchen"):
+        case("diswasher"):
+        case("toilet"):
+          setpmGpmgauge((prev)=>prev + 10) 
+          break;
+        case("laundry"):
+          setpmGpmgauge((prev)=>prev + 20) 
+          break;
+        case("bath"):
+          setpmGpmgauge((prev)=>prev + 45) 
+          break;
+        case("Sprinklers"):
+          setpmGpmgauge((prev)=>prev + 60) 
+          break;
+        default:
+        value = 1 
+      }
+      setstatusControlBox({...statusControlBox, [x.currentTarget.id] : value }
+      )
+    }
+
+    if(waterAnimation === false){
+      setwaterAnimation(true)
+    }
   }
+  const endwaterAnimation = ()=>{  
+   
+  if((Object.keys(statusControlBox).length === 0)){
+    setwaterAnimation(()=>false)
+    pmTank.current.classList.remove("waterAnimation")
+    pmTankRight.current.classList.remove("waterAnimationRight")
+    document.getElementById("psi-needle-pm").classList.remove("psi-needle-pm-animate")
+    document.getElementById("gpm-needle-pm").classList.remove("gpm-needle-pm-animate")
+    // document.getElementById("amp-needle-pm").classList.remove("amp-needle-pm-animate")
+    document.getElementById("psi-needle").classList.remove("psi-needle-animate")
+    document.getElementById("gpm-needle").classList.remove("gpm-needle-animate")
+    document.getElementById("amp-needle").classList.remove("amp-needle-animate")
+    ballLeft.current.classList.remove("waterBallAnimation")
+    ballRight.current.classList.remove("waterBallAnimation")
+    toggleSwitch.current.style.borderColor = "rgb(239 68 68)"
+    toggleSwitchRight.current.classList.remove("toggleLight")
+    
+    }
+  }
+  const startwaterAnimation = () =>{
+    if((pmTank.current.classList != "waterAnimation") && waterAnimation === true){
+      pmTank.current.classList.add("waterAnimation")
+      pmTankRight.current.classList.add("waterAnimationRight")
+      toggleSwitchRight.current.classList.add("toggleLight")
+      setTimeout(greenLight,5000)
+      
+      ballLeft.current.classList.add("waterBallAnimation")
+      ballRight.current.classList.add("waterBallAnimation")
+
+      document.getElementById("psi-needle-pm").classList.add("psi-needle-pm-animate")
+      document.getElementById("psi-needle").classList.add("psi-needle-animate")
+      document.getElementById("gpm-needle").classList.add("gpm-needle-animate")
+      document.getElementById("amp-needle").classList.add("amp-needle-animate")
+  }
+}
+const ampGauge= () =>{
+  if(Object.keys(statusControlBox).length === 6){
+    console.log(Object.keys(statusControlBox).length)
+    setpmAmpgauge(25)
+  }else if((Object.keys(statusControlBox).length >= 1) && Object.keys(statusControlBox).length < 6){
+    setpmAmpgauge(20)
+  }else{
+    setpmAmpgauge(0)
+  }
+}
+  useEffect(()=>{
+    startwaterAnimation()
+  }),[waterAnimation]
+  useEffect(()=>{
+    endwaterAnimation()
+    ampGauge()
+    //need to change dependency to waterAnimation
+  }),[statusControlBox]
   return (
     <>
       <div id="parent" className="flex gap-2 flex-col justify-around m-auto">
         <div id="upper-half" className="relative m-auto max-w-5xl  min-h-full">  
-          <img src={BG} className="bg-contain" />
+          <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/bg-pump-miser.png"} className="bg-contain" />
           <div id="logo" className="w-36 top-0 left-0 absolute">
-            <img src={logo}/>
+            <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/AquaSolutions-7e4f4499.png"}/>
           </div>
-          <div id="chat-bubble" ref={chatBubble} className="absolute top-1/4 right-1/4 z-10	w-1/4" >
+          <div id="chat-bubble" 
+          style={{"display":`${waterAnimation === true ? "none":""}`}}
+          className="absolute top-1/4 right-1/4 z-10	w-1/4">
             <div className="bubble relative">
               <div className="bubble-content font-bold">
-                <p>Click a button to turn on the water and start the Pump Miser&#8482; demo</p>
+                <p className="!m-0">Click a button to turn on the water and start the Pump Miser&#8482; demo</p>
               </div>
               <div className="bubble-tail"></div>
             </div>
           </div>
           <div id="control-panel" className="flex justify-center absolute items-center top-1/4 right-3">
             <div id="water-usage-box" className="border-2 m-3 p-2">
-              <div id="kitchen" onClick={(a)=>selectAction(a)} className="house-service  hover:text-amber-400">
+              <div id="kitchen" data-value={1} onClick={(a)=>selectIcon(a)} className="house-service  hover:text-amber-400">
                 <div className="appliance-icon">
-                  <img src={Kitchen}/>
+                  <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Washing-Dish.png"}/>
                 </div>
-                <p className="text-xs">RUN KITCHEN SINK</p>
+                <p className="text-xs !m-0">RUN KITCHEN SINK</p>
               </div>
-              <div id="dishwasher" onClick={(a)=>selectAction(a)} className="house-service hover:text-amber-400">
+              <div id="dishwasher" data-value={1} onClick={(a)=>selectIcon(a)} className="house-service hover:text-amber-400">
                 <div className="appliance-icon">
                   <img src={Dishwasher}/>
                 </div>
-                <p className="text-xs">RUN DISHWASHER</p>
+                <p className="text-xs !m-0">RUN DISHWASHER</p>
               </div>
-              <div id="laundry" onClick={(a)=>selectAction(a)} className="house-service hover:text-amber-400">
+              <div id="laundry" data-value={2} onClick={(a)=>selectIcon(a)} className="house-service hover:text-amber-400">
                 <div className="appliance-icon">
                   <img src={Laundry}/>
                 </div>
-                <p className="text-xs">WASH LAUNDRY</p>
+                <p className="text-xs !m-0">WASH LAUNDRY</p>
               </div>
-              <div id="bath" onClick={(a)=>selectAction(a)} className="house-service hover:text-amber-400">
+              <div id="bath" data-value={3} onClick={(a)=>selectIcon(a)} className="house-service hover:text-amber-400">
                 <div className="appliance-icon">
                   <img src={Bath}/>
                 </div>
-                <p className="text-xs">TAKE A SHOWER</p>
+                <p className="text-xs !m-0">TAKE A SHOWER</p>
               </div>
-              <div id="Sprinklers" onClick={(a)=>selectAction(a)} className="house-service hover:text-amber-400">
+              <div id="Sprinklers" data-value={8} onClick={(a)=>selectIcon(a)} className="house-service hover:text-amber-400">
                 <div className="appliance-icon">
                   <img src={Sprinkler}/>
                 </div>
-                <p className="text-xs">SPRINKLERS</p>
+                <p className="text-xs !m-0">SPRINKLERS</p>
               </div>
-              <div id="toilet" onClick={(a)=>selectAction(a)} className="house-service hover:text-amber-400">
+              <div id="toilet" data-value={1} onClick={(a)=>selectIcon(a)} className="house-service hover:text-amber-400">
                 <div className="appliance-icon">
                   <img src={Toilet}/>
                 </div>
-                <p className="text-xs">FLUSH TOILET</p>
+                <p className="text-xs !m-0">FLUSH TOILET</p>
               </div>
             </div>
           </div>
@@ -158,7 +231,7 @@ function App() {
           className="absolute items-center gap-2 top-32 right-[25rem] flex-col h-auto"
           >
             <div className="w-36 rounded-full border-4	">
-              <img className="rounded-full h-32" src={Kitchengif}/>
+              <img className="rounded-full h-32" src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/kitchen-68c4b31e.gif"}/>
             </div>
             <div>
               <span className="border-2 border-dashed flex	border-black	h-28"></span>
@@ -170,14 +243,14 @@ function App() {
               <span className="border-2 border-dashed flex border-black	w-full"></span>
             </div>
             <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full border-4 p-4 overflow-hidden	">
-              <img className="w-11/12" src={DishwashergifV}/>
+              <img className="w-11/12" src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/12/DishwasherV-76f531af.gif"}/>
             </div>
           </div>
           <div id="laundryanimation" style={{"display":"none"}} 
           className="absolute gap-2 bottom-0 left-44 items-center"
           >
             <div className="w-36 h-36 flex items-center justify-center bg-slate-700 rounded-full border-4 p-4 overflow-hidden">
-              <img className="w-9/12" src={Laundrygif}/>
+              <img className="w-9/12" src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/laundry-8c46cacd.gif"}/>
             </div>
             <div className="w-24">
               <span className="border-2 border-dashed flex border-black	w-full"></span>
@@ -187,7 +260,7 @@ function App() {
           className="absolute gap-2 bottom-24 left-2 items-center flex-col"
           >
             <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full border-4 p-4">
-              <img className="w-9/12" src={sprinklersgif}/>
+              <img className="w-9/12" src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/sprinkler-f652a2a5.gif"}/>
             </div>
             <div className=" h-8 flex">
               <span className="border-2 border-dashed flex border-black"></span>
@@ -197,7 +270,7 @@ function App() {
           className="absolute top-40 left-64 items-end"
           >
             <div className="w-36 h-36 flex items-center justify-center bg-slate-700	rounded-full p-4 border-4 overflow-hidden">
-              <img className="w-8/12" src={Toiletgif}/>
+              <img className="w-8/12" src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/toilet-337c213a.gif"}/>
             </div>
             <div className="w-20 skew-y-12 justify-self-start">
               <span className="border-2 border-dashed flex border-black	w-full"></span>
@@ -205,17 +278,17 @@ function App() {
             
           </div>
         </div>
-        <div id="lower-half" className="flex w-full justify-center max-w-7xl m-auto gap-4">
-            <div id="left-side" className="w-1/2 ">
+        <div id="lower-half" className="flex w-full justify-center max-w-7xl m-auto gap-4 flex-row-reverse">
+            <div id="left-side" className="w-1/2">
               <div id="pump-miser-logo" className="w-40">
-                <img src={pmLogo} className="p-2"/>
+                <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/PM-logo-f41ebcc8.png"} className="p-2"/>
               </div>
               <div className="w-full">
-                <div id="upper-tube" className="flex -mb-9 ml-auto mr-0">
+                <div id="upper-tube" className="relative z-10 flex -mb-9 ml-auto mr-0">
                   <div id="tank-container" className="w-2/3 flex items-center flex-col justify-end">
                     <div className="flex w-10/12 gap-3">
                       <div id="pumpMiser-container" className="flex flex-col justify-end items-end w-20 mb-4 relative">
-                        <img src={pumpMiser}/>
+                        <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pump-Miser-b61bd711.svg"}/>
                         <div id="border-line" className="flex flex-col w-full items-end -z-10 absolute left-3/4 -bottom-2">
                           <span className="border-solid	border border-zinc-700 self-start h-3"></span>
                           <span className="w-full border-solid border border-zinc-700"></span>
@@ -272,7 +345,7 @@ function App() {
                           <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">20</text>
                           <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
                           <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                            <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                            <path id="psi-needle-pm"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
                           </g>
                           <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                           <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">PSI</text>
@@ -284,26 +357,26 @@ function App() {
                       </div>
                     </div>
                     <div className="-mt-1.5">
-                      <img src={pipe1} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe1-ee3f4fa1.svg"} />
                     </div>
                   </div>
                   <div id="pressure-container" className="flex flex-col w-1/3 justify-end items-center">
-                    <p className="text-xs font-bold">Pressure</p>
-                    <p className="text-xs font-bold">Switch</p>
+                    <p className="text-xs font-bold !m-0">Pressure</p>
+                    <p className="text-xs font-bold !m-0">Switch</p>
                     <div className="flex flex-col items-center">
                       <div className="flex ml-5 max-h-6 items-center">
                         <div className="flex w-8 h-full bg-neutral-500">
-                          <span ref={toggleSwitch} className="rounded-full border-8 m-auto border-red-500"></span>
+                          <span ref={toggleSwitch} className="rounded-full !border-8 m-auto border-red-500 border-solid	"></span>
                         </div>
                         <div className="ml-1">
-                          <p className="text-xs">50</p>
-                          <p className="text-xs">70</p>
+                          <p className="text-xs !m-0">50</p>
+                          <p className="text-xs !m-0">70</p>
                         </div>
                       </div>
                       <span className="bg-neutral-500	 w-2 h-8"></span>
                       </div>
                     <div className="-mt-1.5">
-                      <img src={pipe2} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe2-5ec5ae77.svg"} />
                     </div>
                   </div>
                   <div id="gpm-container" className="flex flex-col w-1/3 justify-end items-center">
@@ -317,8 +390,15 @@ function App() {
                             <text x="32" y="13" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">10</text>
                             <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">5</text>
                             <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
-                            <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                            <g id="needle" transform="translate(33, 20) rotate(-120 3.481 10.514)" fill="#FB0000">
+                              <path 
+                              id="gpm-needle-pm"  
+                              style={{ 
+                                transformOrigin: '3.952px 6.758px',
+                                transition: 'transform 0.5s ease-in',
+                                transform: `rotate(${pmGpmgauge}deg)`
+                              }} 
+                              d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
                             </g>
                             <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                             <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">GPM</text>
@@ -327,11 +407,11 @@ function App() {
                       <span className="bg-neutral-500	 w-2 h-8"></span>
                     </div>
                     <div className="-mt-1.5">
-                      <img src={pipe2} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe2-5ec5ae77.svg"} />
                     </div>
                   </div>
                 </div>
-                <div id="water-tube" className="relative -z-10 ml-auto mr-0">
+                <div id="water-tube" className="relative ml-auto mr-0">
                   <div ref={ballLeft} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
                   <div id="blueWaterH" className="w-full h-8 rounded-ss-md"></div>
                   <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
@@ -342,12 +422,21 @@ function App() {
                       <svg viewBox="0 0 74 74" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                         <title>Amp Meter</title>
                         <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
-                        <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
-                        <text x="40" y="18" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
-                        <text x="15" y="19" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
+                        <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">30</text>
+                        <text x="47" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
+                        <text x="31" y="15" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
+                        <text x="15" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
                         <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
-                        <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                          <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                        <g id="needle" transform="translate(33, 20) rotate(-125 3.481 10.514)" fill="#FB0000">
+                          <path 
+                          id="amp-needle-pm"
+                          style={{ 
+                            transformOrigin: '3.952px 6.758px',
+                            transition: 'transform 0.5s ease-in',
+                            transform: `rotate(${pmAmpgauge}deg)`
+                          }}
+                          d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z">
+                          </path>
                         </g>
                         <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                         <text x="25" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">AMP</text>
@@ -358,18 +447,19 @@ function App() {
                   </div>
                   <div className="flex-1 relative">
                     <div className="w-6">
-                      <img src={wellPump}/>
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/well-pump-fcdd787b.png"}/>
                     </div>
-                    <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1" />
+                    <img src={(waterAnimation === false) ? "https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Recycle-13284bc8.svg":"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/RecycleAnimation-ca1a8a11.svg"} className="absolute top-1/4 left-1" />
                   </div>
-                  <div className="w-1/4 m-auto"><img src={HappyWoman} /></div>
+                  <div className="w-1/4 m-auto"><img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Happy-Woman-Profile-65fee01a.png"} /></div>
                 </div>
               </div>           
             </div>
             <span className="border-slate-500 border-r-4"></span>
-            <div id="right-side" className="w-1/2	flex items-end">
+            <div id="right-side" className="w-1/2	flex justify-between flex-col">
+              <p className="py-2 !m-0 font-bold text-left">Conventional System</p>
               <div className="w-full">
-                <div id="right-upper-tube" className="flex -mb-9 ml-auto mr-0">
+                <div id="right-upper-tube" className="relative z-10 flex -mb-9 ml-auto mr-0">
                   <div id="right-tank-container" className="w-2/3 flex items-center flex-col justify-end">
                     <div className="flex justify-end w-9/12 gap-3">
                       <div id="right-tank-container-svg" className="flex w-24 relative">
@@ -421,7 +511,7 @@ function App() {
                             <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">20</text>
                             <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
                             <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                              <path id="psi-needle"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
                             </g>
                             <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                             <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">PSI</text>
@@ -433,26 +523,27 @@ function App() {
                       </div>
                     </div>
                     <div className="-mt-1.5">
-                      <img src={pipe1} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe1-ee3f4fa1.svg"} />
                     </div>
                   </div>
                   <div id="right-pressure-container" className="flex flex-col w-1/3 justify-end items-center">
-                    <p className="text-xs font-bold">Pressure</p>
-                    <p className="text-xs font-bold">Switch</p>
+                    <p className="text-xs font-bold !m-0">Pressure</p>
+                    <p className="text-xs font-bold !m-0">Switch</p>
                     <div className="flex flex-col items-center">
                       <div className="flex ml-5 max-h-6 items-center">
                         <div className="flex w-8 h-full bg-neutral-500" >
-                          <span ref={toggleSwitchRight}  className="rounded-full border-8 m-auto border-red-500"></span>
+                          <span ref={toggleSwitchRight}  
+                          className="rounded-full border-8 m-auto border-red-500 border-solid"></span>
                         </div>
                         <div className="ml-1">
-                          <p className="text-xs">50</p>
-                          <p className="text-xs">70</p>
+                          <p className="text-xs !m-0">40</p>
+                          <p className="text-xs !m-0">60</p>
                         </div>
                       </div>
                       <span className="bg-neutral-500	 w-2 h-8"></span>
                       </div>
                     <div className="-mt-1.5">
-                      <img src={pipe2} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe2-5ec5ae77.svg"} />
                     </div>
                   </div>
                   <div id="right-gpm-container" className="flex flex-col w-1/3 justify-end items-center">
@@ -467,7 +558,9 @@ function App() {
                             <text x="17" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">5</text>
                             <text x="10" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="7" fontWeight="bold" fill="#000000">0</text>
                             <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                              <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                              <path 
+                              id="gpm-needle" 
+                              d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
                             </g>
                             <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                             <text x="26" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">GPM</text>
@@ -476,12 +569,12 @@ function App() {
                       <span className="bg-neutral-500	 w-2 h-8"></span>
                     </div>
                     <div className="-mt-1.5">
-                      <img src={pipe2} />
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Pipe2-5ec5ae77.svg"} />
                     </div>
                   </div>
 
                 </div>
-                <div id="right-water-tube" className="relative -z-10 ml-auto mr-0">
+                <div id="right-water-tube" className="relative ml-auto mr-0">
                   <div ref={ballRight} className="waterBall w-4 h-4 absolute border-2 rounded-full top-2/3"></div>
                   <div id="blueWaterH" className="w-full h-8 rounded-ss-md"></div>
                   <div id="blueWaterV" className="w-4 h-7 self-start rounded-br-2xl"></div>
@@ -492,12 +585,13 @@ function App() {
                     <svg viewBox="0 0 74 74" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                       <title>Amp Meter</title>
                       <circle cx="36" cy="36" r="34" stroke="#979797" strokeWidth="5" fill="none" />
-                      <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
-                      <text x="40" y="18" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
-                      <text x="15" y="19" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
-                      <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
+                      <text x="52" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">30</text>
+                        <text x="47" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">25</text>
+                        <text x="31" y="15" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">15</text>
+                        <text x="15" y="22" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">10</text>
+                        <text x="7" y="34" fontFamily="Helvetica-Bold, Helvetica" fontSize="9" fontWeight="bold" fill="#000000">5</text>
                       <g id="needle" transform="translate(33, 20) rotate(-100 3.481 10.514)" fill="#FB0000">
-                        <path id="needle-path"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
+                        <path id="amp-needle"  d="M7.902,1.381 L3.481,10.514 C3.093,11.454 2.409,12 1.657,12 C1.041,12 0.517,11.694 0.221,11.213 C-0.098,10.645 -0.075,9.946 0.312,9.356 L6.102,0.463 C6.398,0.026 6.991,-0.127 7.469,0.113 C7.948,0.354 8.130,0.900 7.902,1.381 Z" />
                       </g>
                       <path id="Line" d="M36,6 C43.962,6 51.479,9.079 56.969,14.857 C62.594,20.778 66.158,29.314 66.869,37 L5.143,37 C6.649,22.114 19.889,6 36,6 Z" fill="none" stroke="#979797" />
                       <text x="25" y="52" fontFamily="Helvetica-Bold, Helvetica" fontSize="10" fontWeight="bold" fill="#000000">AMP</text>
@@ -508,11 +602,11 @@ function App() {
                     </div>
                   <div className="flex-1 relative">
                     <div className="w-6">
-                      <img src={wellPump}/>
+                      <img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/well-pump-fcdd787b.png"}/>
                     </div>
-                    <img src={(recycleIcon === false) ? Recycle:RecycleAnimation} className="absolute top-1/4 left-1"/>
+                    <img src={(waterAnimation === false) ? "https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Recycle-13284bc8.svg":"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/RecycleAnimation-ca1a8a11.svg"} className="absolute top-1/4 left-1"/>
                   </div>
-                  <div className="w-1/4 m-auto"><img src={AngryWoman} /></div>
+                  <div className="w-1/4 m-auto"><img src={"https://www.aquasolutionsus.com/wp-content/uploads/2023/11/Angry-Woman-Profile-27961d49.png"} /></div>
                 </div>
               </div>
             </div>

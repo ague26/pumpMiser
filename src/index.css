@@ -162,21 +162,115 @@ p {
   width: calc(100% - 4.75rem);
 }
 
-@keyframes rotateNeedle {
-  0% {
-    transform: rotate(-0deg);
+@keyframes ampNeedlepm {
+  from{
+    transform: rotate(-20deg);
   }
-  100% {
-    transform: rotate(70deg); /* Adjust the angle as needed to point to "15" */
+  to{
+    transform: rotate(100deg);
   }
 }
 
-#needle-path {
-  animation: rotateNeedle 2s ease-in-out infinite; /* You can adjust the duration as needed */
+.amp-needle-pm-animate {
+  animation: ampNeedlepm 2s ; 
+  transform-origin: 3.952px 6.758px; 
+}
+
+@keyframes ampNeedlepmFull {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+.amp-animate-full {
+  animation: ampNeedlepmFull 2s ease-in-out infinite; /* You can adjust the duration as needed */
   transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
 }
 
+@keyframes ampNeedle {
+  0%, 100% {transform: rotate(30deg);}
+  
+  50% {
+    transform: rotate(180deg);
+  }
+}
 
+.amp-needle-animate{
+  animation: ampNeedle 4s linear infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
 
+@keyframes psiNeedlepm {
+  0%,100% {
+    transform: rotate(140deg);
+  }
+  50% {
+    transform: rotate(130deg); 
+  }
+}
+
+.psi-needle-pm-animate {
+  animation: psiNeedlepm 2s ease-in-out infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
+
+@keyframes psiNeedle {
+  0%, 100% {transform: rotate(80deg);}
+  
+  50% {
+    transform: rotate(130deg);
+  }
+}
+
+.psi-needle-animate{
+  animation: psiNeedle 4s linear infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
+
+@keyframes gpmNeedlepm {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(20deg); /* Adjust the angle as needed to point to "15" */
+  }
+}
+
+.gpm-needle-pm-animate {
+  animation: gpmNeedlepm 2s ease-in-out infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
+
+@keyframes gpmNeedle {
+  0%, 100% {transform: rotate(120deg);}
+  
+  50% {
+    transform: rotate(150deg);
+  }
+}
+
+.gpm-needle-animate{
+  animation: gpmNeedle 4s linear infinite; /* You can adjust the duration as needed */
+  transform-origin: 3.952px 6.758px; /* Specify the center point for rotation */
+}
+@keyframes colorTransition {
+  
+  0%, 100% {
+    border-color: rgb(0, 255, 0);
+  }
+  50% {
+    border-color: rgb(255, 0, 0);
+  }
+}
+.toggleLight{
+  /* border-color: rgb(0, 255, 0);
+  transition: "border-color 10s linear"; */
+  border-color: rgb(255, 0, 0);
+  animation: colorTransition 15s infinite alternate;
+  animation-timing-function: linear;
+}
 
 
